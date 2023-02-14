@@ -1,4 +1,7 @@
 ---
+import Header from '../components/Header.astro';
+import ThemeToggle from '../components/ThemeToggle';
+
 export interface Props {
 	title: string;
 }
@@ -7,7 +10,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -15,11 +18,29 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-		<slot />
+	<body class="g-gray-100 h-full  dark:bg-zinc-900 dark:text-white dark:transition-colors duration-300" onload="">		
+		<Header/>
+		<ThemeToggle client:load/>
+		
+		<main class="base-container">
+			<slot />
+		</main>
 	</body>
 </html>
 <style is:global>
+	.base-container {
+		max-width: 45rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	html, body {
+		height: 100%;
+		width: 100%;
+		padding: 0px;
+		margin: 0px;
+	}
 	:root {
 		--accent: 124, 58, 237;
 		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
@@ -33,3 +54,22 @@ const { title } = Astro.props;
 			Bitstream Vera Sans Mono, Courier New, monospace;
 	}
 </style>
+<script is:inline>
+	const theme = (() => {
+	  if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+		return localStorage.getItem("theme");
+	  }
+	  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+		return "dark";
+	  }
+	  return "light";
+	})();
+  
+	if (theme === "light") {
+	  document.documentElement.classList.remove("dark");
+	} else {
+	  document.documentElement.classList.add("dark");
+	}
+	window.localStorage.setItem("theme", theme);
+	
+</script>

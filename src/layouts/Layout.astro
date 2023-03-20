@@ -1,9 +1,14 @@
 ---
-import Header from '../components/Header.astro';
-import ThemeToggle from '../components/ThemeToggle';
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import ThemeToggle from "../components/ThemeToggle";
+import "../style/global.css";
+import "../style/global.less";
+
+import "@fontsource/merriweather";
 
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -11,65 +16,75 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en" class="dark">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="g-gray-100 h-full  dark:bg-zinc-900 dark:text-white dark:transition-colors duration-300" onload="">		
-		<Header/>
-		<ThemeToggle client:load/>
+  <head>
+    <!-- <script is:inline>
+			// The configured mode is stored in local storage
+			const isDarkMode = localStorage.getItem('theme');
 		
-		<main class="base-container">
-			<slot />
-		</main>
-	</body>
+			// Set theme to 'dark' if darkMode = 'true'
+			const theme = isDarkMode === 'true' ? 'dark' : '';
+		
+			// Put dark class on html tag to enable dark mode
+			document.documentElement.className = theme;
+		
+		</script> -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="dark:bg-zinc-900 dark:text-white">
+    <Header />
+
+    <main class="base-container">
+      <Navigation />
+      <slot />
+    </main>
+  </body>
 </html>
+
 <style is:global>
-	.base-container {
-		max-width: 45rem;
-		padding-left: 1rem;
-		padding-right: 1rem;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	html, body {
-		height: 100%;
-		width: 100%;
-		padding: 0px;
-		margin: 0px;
-	}
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+  .base-container {
+    max-width: 50rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      #da62c4 30%,
+      white 60%
+    );
+  }
+  html {
+    font-family: system-ui, sans-serif;
+  }
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
 </style>
 <script is:inline>
-	const theme = (() => {
-	  if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-		return localStorage.getItem("theme");
-	  }
-	  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-		return "dark";
-	  }
-	  return "light";
-	})();
-  
-	if (theme === "light") {
-	  document.documentElement.classList.remove("dark");
-	} else {
-	  document.documentElement.classList.add("dark");
-	}
-	window.localStorage.setItem("theme", theme);
-	
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
+
+  if (theme === "light") {
+    document.documentElement.classList.remove("dark");
+  } else {
+    document.documentElement.classList.add("dark");
+  }
+  window.localStorage.setItem("theme", theme);
 </script>

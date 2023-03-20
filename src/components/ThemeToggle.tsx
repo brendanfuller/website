@@ -18,6 +18,8 @@ export default function ThemeToggle() {
   }, [theme]);
 
   return (
-    <button onClick={handleClick}>{theme === "light" ? "🌙" : "🌞"}</button>
+    <button onClick={handleClick} class="">
+      {theme === "light" ? "Light 🌙" : "Dark 🌞"}
+    </button>
   );
 }

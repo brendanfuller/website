@@ -1,0 +1,28 @@
+---
+import ProjectInformation from "../components/ProjectInformation.astro";
+import SocialComponent from "../components/SocialComponent.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Brendan Fuller | About">
+  <h1 class="mb-0">Projects</h1>
+  <ProjectInformation
+    name="Xemplate"
+    github="https://github.com/brendanfuller/xemplate"
+  >
+    Xemplate is project designed to learn Abstract Syntax Tree (AST) and was the
+    first Typescript project overall. The application support templates with
+    property replacecment with a "hot reload server", also support importing
+    from other files.
+  </ProjectInformation>
+  <ProjectInformation
+    name="CommentMaster"
+    github="https://github.com/brendanfuller/CommentMaster"
+  >
+    CommentMaster is a Visual Basic Forms (VB.net) application written to
+    provide a GUI to auto generate comments required by a course. The goal of
+    this applicaiton was to create block comments with auto spacing and
+    formatting with the ability to provide a list of local variables to be
+    commented whilst completed with the program.
+  </ProjectInformation>
+</Layout>

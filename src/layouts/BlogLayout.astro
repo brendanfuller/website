@@ -1,0 +1,44 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+import "@fontsource/roboto-slab";
+type Props = MarkdownLayoutProps<{
+  // Define frontmatter props here
+  title: string;
+  author: string;
+  date: string;
+  description: string;
+  minutesRead: number;
+}>;
+
+import Layout from "./Layout.astro";
+
+import Sidebar from "../components/blog/Sidebar";
+const { frontmatter, headings } = Astro.props;
+
+//Date
+const dateOptions: object = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
+
+const formattedPublishDate = new Date(frontmatter.date).toLocaleDateString(
+  "en-US",
+  dateOptions
+);
+---
+
+<Layout title={`Brendan Fuller | ${frontmatter.title}`}>
+  <article itemtype="http://schema.org/BlogPosting" class="mt-5">
+    <div id="article-header">
+      <p id="article-meta">
+        {formattedPublishDate} - {frontmatter.minutesRead} - Brendan Fuller
+      </p>
+      <h1 id="article-title">{frontmatter.title}</h1>
+      <p id="article-description">{frontmatter.description}</p>
+      <hr />
+    </div>
+    <Sidebar headings={headings} client:load />
+    <slot />
+  </article>
+</Layout>

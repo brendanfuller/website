@@ -1,10 +1,11 @@
 ---
+import type { MarkdownInstance } from "astro";
 import Notebook from "../components/icons/Notebook.astro";
 import SocialComponent from "../components/SocialComponent.astro";
 import Layout from "../layouts/Layout.astro";
 
 //Force it as any for empty
-let allPosts: any = [];
+let allPosts: MarkdownInstance<Record<string, any>>[] = [];
 
 //Try to get posts, if there is none the catch will trigger
 //as astro has no way of getting "no" posts

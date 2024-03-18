@@ -15,7 +15,6 @@ article h3,
 article h4,
 article h5,
 article h6 {
-  font-family: Merriweather, Times New Roman, Times, serif;
   margin-top: 2rem;
   font-weight: 800;
   line-height: 1.45em;
@@ -59,8 +58,8 @@ article {
 }
 
 article p {
-  line-height: 2;
-  font-size: 1.3rem;
+  line-height: 1.5;
+  font-size: 1.1rem;
   margin-bottom: 1.8rem;
 
   position: relative;
@@ -68,7 +67,7 @@ article p {
 }
 
 article p strong {
-  @apply text-red-400 font-bold;
+  @apply text-orange-300 font-bold;
 }
 
 .font-roboto {
@@ -108,7 +107,7 @@ blockquote {
 /* Article Styles */
 
 #article-header {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 #article-meta {
   padding: 0;
@@ -121,7 +120,7 @@ blockquote {
   padding: 0;
   margin: 0;
   padding-bottom: 10px;
-  font-size: 3rem;
+  font-size: 2rem;
   font-family: "Roboto", sans-serif;
   font-weight: 800;
   line-height: 1.45em;
@@ -146,7 +145,6 @@ blockquote {
 }
 
 .heading-link {
-  @apply hover:underline;
 }
 
 .heading-icon {

@@ -31,14 +31,12 @@ const formattedPublishDate = new Date(frontmatter.date).toLocaleDateString(
 <Layout title={`Brendan Fuller | ${frontmatter.title}`}>
   <article itemtype="http://schema.org/BlogPosting" class="mt-5">
     <div id="article-header">
-      <p id="article-meta">
-        {formattedPublishDate} - {frontmatter.minutesRead} - Brendan Fuller
-      </p>
-      <h1 id="article-title">{frontmatter.title}</h1>
+      <p id="article-title">{frontmatter.title}</p>
       <p id="article-description">{frontmatter.description}</p>
-      <hr />
+      <p id="article-meta">
+        {formattedPublishDate} - {frontmatter.minutesRead}
+      </p>
     </div>
-    <Sidebar headings={headings} client:load />
     <slot />
   </article>
 </Layout>

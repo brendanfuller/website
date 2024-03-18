@@ -59,6 +59,7 @@ export default defineConfig({
     ],
   },
   site: "https://brendanfuller.com",
+  output: "static",
   integrations: [
     preact(),
     tailwind({

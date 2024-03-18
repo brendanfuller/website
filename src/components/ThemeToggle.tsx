@@ -2,7 +2,9 @@ import { useEffect, useState } from "preact/hooks";
 import type { FunctionalComponent } from "preact";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
+  const [theme, setTheme] = useState(
+    window.localStorage.getItem("theme") ?? "light"
+  );
 
   const handleClick = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -14,7 +16,7 @@ export default function ThemeToggle() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem("theme", theme);
+    window.localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
